@@ -13,7 +13,7 @@ const os = require('os')
 // Require cluster to run multiple instances of Node.js that can distribute workloads among their application threads
 const cluster = require('cluster')
 // Specify the port on which the Node.js application will listen for incoming requests
-const appPort = process.env.PORT || 5000
+const appPort = process.env.APP_PORT || 5000
 // Create an Express application
 const app = express();
 
@@ -41,5 +41,15 @@ if (cluster.isMaster) {
         cluster.fork();
     });
 } else {
-    // Means we are NOT in the master process
+    // Means we are NOT in the master process, therefore Listen for incoming connections on the designated port
+     app.listen(appPort, function (error) {
+        //Evaluate if connections were successful or not
+        if (error) {
+            //Means connection ERROR. 
+            console.log(error);
+        } else {
+            //Means connection SUCCESS. System is listening for requests.
+            console.log('Process ' + process.pid + ' is listening for incoming requests on http://localhost:%s', appPort);
+        }
+    });
 }

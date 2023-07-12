@@ -5,12 +5,12 @@
  */
 const express = require('express')
 const router = express.Router()
-const { getRandomNumber } = require('../controllers/randomNumberController')
+const { getRandomNumbers, setRandomNumbers, updateRandomNumbers, deleteRandomNumbers } = require('../controllers/randomNumberController')
 
 // Chain the GET and SET methods to one route since both of their endpoints are similar i.e. (/)
-router.route('/').get(getRandomNumber).post(setRandomNumber)
+router.route('/').get(getRandomNumbers).post(setRandomNumbers)
 
 // Chain the UPDATE and DELETE methods to one route since both of their endpoints are similar i.e. (/:id)
-router.route('/:id').put(updateRandomNumber).delete(deleteRandomNumber)
+router.route('/:id').put(updateRandomNumbers).delete(deleteRandomNumbers)
 
 module.exports = router

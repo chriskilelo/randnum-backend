@@ -1,3 +1,9 @@
+/**
+ * TO GOD BE ALL THE GLORY
+ * 12-JUL-2023
+ * This is the main/entry file that is invoked when an outside application wants to transact with this system
+ */
+
 // Require dotenv which loads environment variables from the .env file into process.env
 require('dotenv').config()
 // Require the Express Node.js application framework
@@ -11,3 +17,29 @@ const appPort = process.env.PORT || 5000
 // Create an Express application
 const app = express();
 
+//Check if we are in the master process (the process you start from the command line)
+if (cluster.isMaster) {
+    // Means we are in the master process. Get the total number of CPUs/cores that this machine has.
+    const numWorkers = require('os').cpus().length;
+    // Output the number of cores that a machine has
+    console.log('Machine has [' + numWorkers + '] CPUs. Preparing to create [' + numWorkers + '] worker processes. ');
+    // For each CPU/core available, create a separate WORKER PROCESS to handle requests
+    for (var i = 0; i < numWorkers; i++) {
+        cluster.fork();
+    }
+     //Listen for any worker processes that will come online
+     cluster.on('online', function (worker) {
+        //Report on each worker process that has successfully been started
+        console.log('Worker ' + worker.process.pid + ' is online');
+
+    });
+    //Listen for any dying WORKER PROCESSES
+    cluster.on('exit', function (worker, code, signal) {
+        //Make it known that a particular worker process has died.
+        console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal + '. \nStarting a new worker.');
+        //Fork out another WORKER PROCESS to replace the dead one. We are NOT sentimental hapa hivi.
+        cluster.fork();
+    });
+} else {
+    // Means we are NOT in the master process
+}

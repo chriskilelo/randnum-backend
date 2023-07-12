@@ -6,6 +6,8 @@
 
 // Require dotenv which loads environment variables from the .env file into process.env
 require('dotenv').config()
+// Require colors to enable us to log to the console in different colors
+require('colors')
 // Require the Express Node.js application framework
 const express = require('express')
 // Require Os to access operating system related utility methods

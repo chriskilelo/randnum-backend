@@ -24,8 +24,8 @@ const app = express();
 app.use(express.json())
 // Return a middleware that only parses urlencoded bodies and only looks at requests where the Content-Type header matches the type option
 app.use(express.urlencoded({ extended: false }))
-// Send all the '/api_v1.0/randomNumbers' requests to the 'goalRoutes' file for redirection
-app.use('/api_v1.0/randomNumbers', require('./routes/randomNumberRoutes'))
+// Send all the '/api_v1.0/randomStrings' requests to the 'randomStringRoutes' file for redirection
+app.use('/api_v1.0/randomStrings', require('./routes/randomStringRoutes'))
 // Make the error handling middleware available through out the application
 app.use(errorHandler)
 

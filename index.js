@@ -16,6 +16,12 @@ const os = require('os')
 const cluster = require('cluster')
 // Require the error handler middleware
 const { errorHandler } = require('./middleware/errorHandler')
+// Connect to the database as the application is loading
+const connectDB = require('./config/db')
+// Bring in Mongoose to help with database operations through the models
+const { connect } = require('mongoose')
+// Open a connection to the database
+connectDB()
 // Specify the port on which the Node.js application will listen for incoming requests
 const appPort = process.env.APP_PORT || 5000
 // Create an Express application

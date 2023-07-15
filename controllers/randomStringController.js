@@ -9,6 +9,7 @@ const asyncHandler = require('express-async-handler')
 
 // Require the RandomString Model
 const RandomString = require('../models/randomStringModel')
+const generalFunctions = require('../helpers/helpers')
 
 const getRandomStrings = asyncHandler(async (req, res) => {
         // Use 'await' to pause the execution to allow for results to be fetched
@@ -17,6 +18,9 @@ const getRandomStrings = asyncHandler(async (req, res) => {
 })
 
 const setRandomString = asyncHandler(async (req, res) => {
+    // Compose a random string
+    const randomString = generalFunctions.composeRandomString()
+    return randomString
     res.status(200).json({ message: 'POST - create the random string' })
 })
 

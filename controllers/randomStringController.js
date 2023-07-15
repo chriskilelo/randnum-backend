@@ -11,7 +11,9 @@ const asyncHandler = require('express-async-handler')
 const RandomString = require('../models/randomStringModel')
 
 const getRandomStrings = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'GET - fetch the random strings' })
+        // Use 'await' to pause the execution to allow for results to be fetched
+        const allRandomStrings = await RandomString.find()
+        res.status(200).json(allRandomStrings)
 })
 
 const setRandomString = asyncHandler(async (req, res) => {

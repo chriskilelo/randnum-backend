@@ -10,23 +10,26 @@ const asyncHandler = require('express-async-handler')
 // Require the RandomString Model
 const RandomString = require('../models/randomStringModel')
 
-const getRandomStrings = asyncHandler(async () => {
+const getRandomStrings = asyncHandler(async (req, res) => {
     res.status(200).json({ message: 'GET - fetch the random strings' })
 })
 
-const setRandomString = asyncHandler(async () => {
+const setRandomString = asyncHandler(async (req, res) => {
     res.status(200).json({ message: 'POST - create the random string' })
 })
 
-const updateRandomString = asyncHandler(async () => {
+const updateRandomString = asyncHandler(async (req, res) => {
     res.status(200).json({ message: 'PUT - update the random string' })
 })
 
-const deleteRandomString = asyncHandler(async () => {
+const deleteRandomString = asyncHandler(async (req, res) => {
     res.status(200).json({ message: 'DELETE - destroy the random string' })
 })
 
-
+/**
+ * Export the functions and values in this module to allow 
+ * for them to be accessed and used in other parts of this application
+ */
 module.exports = {
     getRandomStrings,
     setRandomString,

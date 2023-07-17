@@ -11,17 +11,17 @@ const asyncHandler = require('express-async-handler')
 const RandomNumber = require('../models/randomNumberModel')
 
 /**
- * @desc    Retrieve all the random numbers saved in the database.
- * @route   GET /api_v1.0/randomNumbers
+ * @desc    Retrieve all the random strings saved in the database.
+ * @route   GET /api_v1.0/randomStrings
  * @access  Private
  */
 const getRandomNumbers = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'GET - fetch the random numbers' })
+    res.status(200).json({ message: 'GET - fetch the random strings' })
 })
 
 /**
- * @desc    Insert a new random number into the database
- * @route   POST /api_v1.0/randomNumbers
+ * @desc    Insert a new random string into the database
+ * @route   POST /api_v1.0/randomStrings
  * @access  Private
  */
 const setRandomNumbers = asyncHandler(async (req, res) => {
@@ -40,21 +40,21 @@ const setRandomNumbers = asyncHandler(async (req, res) => {
 
 
 /**
- * @desc    Update a random number whose ID has been specified
- * @route   PUT /api_v1.0/randomNumbers/:id
+ * @desc    Update a random string whose ID has been specified
+ * @route   PUT /api_v1.0/randomStrings/:id
  * @access  Private
  */
 const updateRandomNumbers = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'PUT - update the random number' })
+    res.status(200).json({ message: 'PUT - update the random string' })
 })
 
 /**
- * @desc    Delete the random number whose ID has been specified
- * @route   DELETE /api_v1.0/randomNumbers/:id
+ * @desc    Delete the random string whose ID has been specified
+ * @route   DELETE /api_v1.0/randomStrings/:id
  * @access  Private
  */
 const deleteRandomNumbers = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'DELETE - destroy the random number' })
+    res.status(200).json({ message: 'DELETE - destroy the random string' })
 })
 
 /**
@@ -74,7 +74,7 @@ const generateRandomCharacters = (length) => {
 }
 
 /**
- * @desc    Generate a random number
+ * @desc    Generate a random string
  * @access  Private
  */
 const composeRandomString = () => {

@@ -97,3 +97,11 @@ const padTimestampItem = (item2Pad) => {
     // Return padded digit
     return item2PadSanitized
 }
+
+/**
+ * Export the functions and values in this module to allow 
+ * for them to be accessed and used in other parts of this application
+ */
+module.exports = {
+    composeRandomString, generateRandomCharacters, generateDateTimeStamp, padTimestampItem
+}

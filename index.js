@@ -36,29 +36,29 @@ app.use('/api_v1.0/randomStrings', require('./routes/randomStringRoutes'))
 app.use(errorHandler)
 
 //Check if we are in the master process (the process you start from the command line)
-if (cluster.isMaster) {
-    // Means we are in the master process. Get the total number of CPUs/cores that this machine has.
-    const numWorkers = require('os').cpus().length;
-    // Output the number of cores that a machine has
-    console.log('Machine has [' + numWorkers + '] CPUs. Preparing to create [' + numWorkers + '] worker processes. ');
-    // For each CPU/core available, create a separate WORKER PROCESS to handle requests
-    for (var i = 0; i < numWorkers; i++) {
-        cluster.fork();
-    }
-    //Listen for any worker processes that will come online
-    cluster.on('online', function (worker) {
-        //Report on each worker process that has successfully been started
-        console.log('Worker ' + worker.process.pid + ' is online');
+// if (cluster.isMaster) {
+//     // Means we are in the master process. Get the total number of CPUs/cores that this machine has.
+//     const numWorkers = require('os').cpus().length;
+//     // Output the number of cores that a machine has
+//     console.log('Machine has [' + numWorkers + '] CPUs. Preparing to create [' + numWorkers + '] worker processes. ');
+//     // For each CPU/core available, create a separate WORKER PROCESS to handle requests
+//     for (var i = 0; i < numWorkers; i++) {
+//         cluster.fork();
+//     }
+//     //Listen for any worker processes that will come online
+//     cluster.on('online', function (worker) {
+//         //Report on each worker process that has successfully been started
+//         console.log('Worker ' + worker.process.pid + ' is online');
 
-    });
-    //Listen for any dying WORKER PROCESSES
-    cluster.on('exit', function (worker, code, signal) {
-        //Make it known that a particular worker process has died.
-        console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal + '. \nStarting a new worker.');
-        //Fork out another WORKER PROCESS to replace the dead one. We are NOT sentimental hapa hivi.
-        cluster.fork();
-    });
-} else {
+//     });
+//     //Listen for any dying WORKER PROCESSES
+//     cluster.on('exit', function (worker, code, signal) {
+//         //Make it known that a particular worker process has died.
+//         console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal + '. \nStarting a new worker.');
+//         //Fork out another WORKER PROCESS to replace the dead one. We are NOT sentimental hapa hivi.
+//         cluster.fork();
+//     });
+// } else {
     // Means we are NOT in the master process, therefore Listen for incoming connections on the designated port
     app.listen(appPort, function (error) {
         //Evaluate if connections were successful or not
@@ -70,4 +70,4 @@ if (cluster.isMaster) {
             console.log('Process ' + process.pid + ' is listening for incoming requests on http://localhost:%s', appPort);
         }
     });
-}
+// }

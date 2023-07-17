@@ -26,11 +26,11 @@ const generateRandomCharacters = (length) => {
  */
 const composeRandomString = () => {
     // Generate random strings in batches
-    const batch01 = generateRandomCharacters(9)
-    const batch02 = generateRandomCharacters(3)
-    const batch03 = generateRandomCharacters(6)
-    const batch04 = generateRandomCharacters(2)
-    const batch05 = generateRandomCharacters(8)
+    const batch01 = generateRandomCharacters(9).trim()
+    const batch02 = generateRandomCharacters(3).trim()
+    const batch03 = generateRandomCharacters(6).trim()
+    const batch04 = generateRandomCharacters(2).trim()
+    const batch05 = generateRandomCharacters(8).trim()
     // Stitch the random string batches into a single string
     return batch01 + '-' + batch02 + '-' + batch03 + '-' + batch04 + '-' + batch05
 }

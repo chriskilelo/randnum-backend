@@ -31,9 +31,23 @@ const getRandomStrings = asyncHandler(async (req, res) => {
  */
 const setRandomString = asyncHandler(async (req, res) => {
     // Compose a random string
-    const randomString = generalFunctions.composeRandomString()
-    return randomString
-    res.status(200).json({ message: 'POST - create the random string' })
+    const randomStr = helpers.composeRandomString()
+    // Create an object to contain the data that needs to be saved
+    const randomStringObj = {
+        random_string: randomStr,
+        generated_by: process.env.DEFAULT_ADMIN_USER
+    }
+    // Initialize a Document i.e. a new instance of the Model
+    const randomStringDoc = new RandomString(randomStringObj)
+    // Save the document to Mongo DB. Use await since it returns a promise
+    await randomStringDoc.save()
+        .then(result => {
+            // Means saving successful, log a brief message on the console for status accounting
+            console.log('Random string: ' + result.random_string.yellow + ' saved successfully.'.green.bold);
+            // Return HTTP Status code 201 - Request has been fulfilled and a new resource has been CREATED
+            res.status(201).json(result);
+        })
+        // The .catch block has not been included because errors are being handled by the [asyncHandler]
 })
 
 

@@ -24,6 +24,16 @@ const getAllRandomStrings = asyncHandler(async (req, res) => {
     res.status(200).json(allRandomStrings)
 })
 
+/**
+ * @description    Retrieve one random string saved in the database by the ID specified
+ * @route   GET /api_v1.0/randomStrings
+ * @access  Private
+ */
+const getRandomString = asyncHandler(async (req, res) => {
+    // Return HTTP status 200 and the result in JSON format
+    res.status(200).json('GET - Find string by ID')
+})
+
 
 /**
  * @description    Insert a new random string into the database
@@ -48,7 +58,7 @@ const setRandomString = asyncHandler(async (req, res) => {
             // Return HTTP Status code 201 - Request has been fulfilled and a new resource has been CREATED
             res.status(201).json(result);
         })
-        // The .catch block has not been included because errors are being handled by the [asyncHandler]
+    // The .catch block has not been included because errors are being handled by the [asyncHandler]
 })
 
 
@@ -77,6 +87,7 @@ const deleteRandomString = asyncHandler(async (req, res) => {
  */
 module.exports = {
     getAllRandomStrings,
+    getRandomString,
     setRandomString,
     updateRandomString,
     deleteRandomString,

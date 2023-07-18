@@ -17,7 +17,7 @@ const helpers = require('../helpers/helpers')
  * @route   GET /api_v1.0/randomStrings
  * @access  Private
  */
-const getRandomStrings = asyncHandler(async (req, res) => {
+const getAllRandomStrings = asyncHandler(async (req, res) => {
     // Use 'await' to pause the execution to allow for results to be fetched
     const allRandomStrings = await RandomString.find()
     res.status(200).json(allRandomStrings)
@@ -75,7 +75,7 @@ const deleteRandomString = asyncHandler(async (req, res) => {
  * for them to be accessed and used in other parts of this application
  */
 module.exports = {
-    getRandomStrings,
+    getAllRandomStrings,
     setRandomString,
     updateRandomString,
     deleteRandomString,

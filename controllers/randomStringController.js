@@ -13,19 +13,20 @@ const helpers = require('../helpers/helpers')
 
 
 /**
- * @desc    Retrieve all the random strings saved in the database.
+ * @description    Retrieve all the random strings saved in the database.
  * @route   GET /api_v1.0/randomStrings
  * @access  Private
  */
 const getAllRandomStrings = asyncHandler(async (req, res) => {
-    // Use 'await' to pause the execution to allow for results to be fetched
+    // Use 'await' to pause the execution until the results are fully fetched
     const allRandomStrings = await RandomString.find()
+    // Return HTTP status 200 and the result in JSON format
     res.status(200).json(allRandomStrings)
 })
 
 
 /**
- * @desc    Insert a new random string into the database
+ * @description    Insert a new random string into the database
  * @route   POST /api_v1.0/randomStrings
  * @access  Private
  */
@@ -52,7 +53,7 @@ const setRandomString = asyncHandler(async (req, res) => {
 
 
 /**
- * @desc    Update a random string whose ID has been specified
+ * @description    Update a random string whose ID has been specified
  * @route   PUT /api_v1.0/randomStrings/:id
  * @access  Private
  */
@@ -62,7 +63,7 @@ const updateRandomString = asyncHandler(async (req, res) => {
 
 
 /**
- * @desc    Delete the random string whose ID has been specified
+ * @description    Delete the random string whose ID has been specified
  * @route   DELETE /api_v1.0/randomStrings/:id
  * @access  Private
  */

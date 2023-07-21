@@ -30,8 +30,17 @@ const getAllRandomStrings = asyncHandler(async (req, res) => {
  * @access  Private
  */
 const getRandomString = asyncHandler(async (req, res) => {
-    // Return HTTP status 200 and the result in JSON format
-    res.status(200).json('GET - Find string by ID')
+    // Search the database to see whether a record matching the ID supplied above will be found.
+    const singleRandomStrObject = await RandomString.findById(req.params.id).exec()
+    // Check whether there is a record that was found in the database
+    if (!singleRandomStrObject) {
+        // Means no random string with the ID supplied has been found in the database
+        res.status(400)
+        // Thrown an error
+        throw new Error('Random string not found')
+    }
+    // Return a 200 OK response and a JSON response of the updated goal
+    res.status(200).json(singleRandomStrObject)
 })
 
 

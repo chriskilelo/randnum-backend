@@ -39,7 +39,7 @@ const getRandomString = asyncHandler(async (req, res) => {
         // Thrown an error
         throw new Error('Random string not found')
     }
-    // Return a 200 OK response and a JSON response of the updated goal
+    // Return a 200 OK response and a JSON response of the updated string
     res.status(200).json(singleRandomStrObject)
 })
 
@@ -101,7 +101,19 @@ const updateRandomString = asyncHandler(async (req, res) => {
  * @access  Private
  */
 const deleteRandomString = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: 'DELETE - destroy the random string' })
+    // Search the database for a record with the ID that has been passed in
+    const randomStringObject = await RandomString.findById(req.params.id)
+    // Check whether there is a record that was found in the database
+    if (!randomStringObject) {
+        // Means no record with that ID has been found in the database
+        res.status(400)
+        // Thrown an error
+        throw new Error('Random string not found')
+    }
+    // Means a record with the ID specified has been found, proceed to delete
+    await randomStringObject.remove()
+    // Return a 200 OK response and a JSON response containing the ID of the deleted string
+    res.status(200).json({ id: req.params.id })
 })
 
 /**
